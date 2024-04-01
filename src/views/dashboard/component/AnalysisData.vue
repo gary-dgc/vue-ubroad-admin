@@ -58,4 +58,3 @@
     margin-top: 15px;
   }
 </style>
-@/store/module/sider.js

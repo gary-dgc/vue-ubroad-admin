@@ -6,6 +6,7 @@ import { setLocCache, getLocCache } from '@/utils/cache';
 import { cacheKey } from '@/common/constant';
 const userSider = defineStore('useMenuSider', {
   state: () => ({
+    loading: false, // 页面加载标记
     collapsed: false, // menu collapsed
     menuList: [], // menu list,
     menus: [],
@@ -14,13 +15,15 @@ const userSider = defineStore('useMenuSider', {
     getMenuCollapsed() {
       return this.collapsed;
     },
-
     getRoutesList() {
       return this.menuList;
     },
   },
 
   actions: {
+    setLoading(loading) {
+      this.loading = loading;
+    },
     setMenuCollapsed(flag) {
       this.collapsed = flag;
     },

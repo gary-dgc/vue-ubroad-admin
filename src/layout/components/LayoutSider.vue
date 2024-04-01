@@ -16,8 +16,8 @@
   import LayoutMenu from './LayoutMenu.vue';
   import useMenuSiderStore from '@/store/module/app.js';
 
-  const sys_name = import.meta.env.VITE_SYSTEM_NAME;
-  const sys_frame = import.meta.env.VITE_SYS_FRAME;
+  const sys_name = import.meta.env.VITE_APP_NAME;
+  const sys_frame = import.meta.env.VITE_APP_FRAME;
 
   const isCollapsed = computed(() => {
     return useMenuSiderStore().getMenuCollapsed;

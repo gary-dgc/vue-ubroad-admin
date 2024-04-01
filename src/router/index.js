@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import useSider from '@/store/module/sider';
+import useSider from '@/store/module/app';
 import indexRoute from './module';
 import errorRoutes from './module/error';
 
@@ -74,7 +74,7 @@ export const loadRoutes = (router) => {
 
     if (!Array.isArray(_routes)) {
       router.addRoute(_routes);
-      console.log('----menu', _routes);
+      //console.log('----menu', _routes);
 
       const menu = checkMenu(_routes);
       if (menu) {
@@ -84,7 +84,7 @@ export const loadRoutes = (router) => {
     }
     for (const route of _routes) {
       router.addRoute(route);
-      console.log('----menu', route);
+      //console.log('----menu', route);
       const menu = checkMenu(route);
       if (menu) {
         menus.push(menu);

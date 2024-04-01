@@ -1,4 +1,6 @@
+import { checkAuth } from '@/utils/http';
 import useStoreOut from '@/store/module/user';
+import useAppStore from '@/store/module/app';
 import { Modal, notification } from 'ant-design-vue';
 import router from '@/router';
 import { pagePath } from '@/common/constant';
@@ -12,9 +14,10 @@ const reset = (to) => {
 const LoginGuard = {
   async before(to, from, next) {
     const useStore = useStoreOut();
+    const appStore = useAppStore();
 
-    if (!useStore.getLoginToken && to.name !== 'login') {
-      useStore.setLoginToken('');
+    if (!checkAuth() && to.name !== 'login') {
+      // useStore.setLoginToken('');
       useStore.setUserInfo(null);
       // localStorage.clear();
       // sessionStorage.clear();
@@ -23,8 +26,9 @@ const LoginGuard = {
 
       return;
     }
-    useStore.setLoadingPage(true);
-    if (useStore.getLoginToken && from.path == '/' && to.name == undefined) {
+    appStore.setLoading(true);
+
+    if (checkAuth() && from.path == '/' && to.name == undefined) {
       await useStore.afterLoginAction(false);
       // Refresh Page Load
       const redirectPath = from.query.redirect || to.path;
@@ -45,9 +49,9 @@ const LoadingGuard = {
     next();
   },
   after() {
-    const useStore = useStoreOut();
+    const appStore = useAppStore();
     setTimeout(() => {
-      useStore.setLoadingPage(false);
+      appStore.setLoading(false);
     }, 100);
   },
 };

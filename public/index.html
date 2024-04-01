@@ -9,21 +9,16 @@
       name="viewport"
       content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
     />
-    <title><%= title %></title>
+    <title><%- title %></title>
+    <%- injectScript %>
   </head>
   <body>
     <div id="app">
       <div class="app-loading">
         <div class="app-loading-wrap">
-          <imgsvg
-            src="/resource/svg/loading-spin.svg"
-            style="margin: auto"
-            alt="loading"
-          />
+          <imgsvg src="/resource/svg/loading-spin.svg" style="margin: auto" alt="loading" />
           <div class="app-loading-title">正在加载资源</div>
-          <div class="app-loading-subTitle">
-            初次加载资源可能需要较多时间，请耐心等待
-          </div>
+          <div class="app-loading-subTitle">初次加载资源可能需要较多时间，请耐心等待</div>
         </div>
       </div>
       <style>

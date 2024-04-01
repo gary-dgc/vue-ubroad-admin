@@ -2,13 +2,13 @@ import { defineStore } from 'pinia';
 import { login, getUserInfo, loginOut } from '@/api/sys/user';
 import router from '@/router';
 import { pagePath, cacheKey } from '@/common/constant';
-import useMenuSiderStore from './sider';
+import { setAuth, removeAuth, checkAuth } from '@/utils/http';
+import useApp from './app';
 import { getLocCache, setLocCache } from '@/utils/cache';
 
 const useStoreOut = defineStore('user', {
   state: () => ({
     token: '',
-    pageLoading: false,
     userInfo: {},
   }),
   getters: {
@@ -17,9 +17,6 @@ const useStoreOut = defineStore('user', {
     },
     getUserInfo() {
       return this.userInfo || getLocCache(cacheKey.USER_INFO);
-    },
-    getLoadingPage() {
-      return this.pageLoading;
     },
   },
   actions: {
@@ -33,10 +30,6 @@ const useStoreOut = defineStore('user', {
       setLocCache(cacheKey.USER_INFO, info);
     },
 
-    setLoadingPage(flag) {
-      this.pageLoading = flag;
-    },
-
     /**
      * @description: 登录
      */
@@ -44,7 +37,9 @@ const useStoreOut = defineStore('user', {
       try {
         const res = await login(data);
         const { token = '' } = res;
+        setAuth(token);
         this.setLoginToken(token);
+
         setLocCache(cacheKey.LOGIN_TOKEN, token);
         await this.afterLoginAction(true);
       } catch (error) {
@@ -56,9 +51,9 @@ const useStoreOut = defineStore('user', {
      * @description: 获取用户信息
      */
     async afterLoginAction(goHome = true) {
-      const useMenuSider = useMenuSiderStore();
+      const useMenuSider = useApp();
       try {
-        if (!this.getLoginToken) return;
+        if (!checkAuth()) return;
         const userInfo = await getUserInfo();
         this.setUserInfo(userInfo);
         setLocCache(cacheKey.USER_INFO, userInfo);
@@ -77,7 +72,7 @@ const useStoreOut = defineStore('user', {
      * @description: 登出，清空缓存
      */
     async loginOut(goLogin = false) {
-      if (this.getLoginToken) {
+      if (checkAuth()) {
         try {
           await loginOut();
         } catch {

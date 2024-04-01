@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 const timestamp = new Date().getTime();
 const prodRollupOptions = {
@@ -55,6 +56,16 @@ export default defineConfig((mode, command) => {
       Components({
         resolvers: [AntDesignVueResolver({ importStyle: mode.mode === 'dev' ? false : 'less' })],
       }),
+      createHtmlPlugin({
+        minify: true,
+        template: 'public/index.html',
+        inject: {
+          data: {
+            title: 'index',
+            injectScript: `<script  src="./config.js"></script>`,
+          },
+        },
+      }),
     ],
     root: process.cwd(),
     base: VITE_PUBLIC_PATH,
@@ -103,6 +114,7 @@ export default defineConfig((mode, command) => {
       sourcemap: true,
       chunkSizeWarningLimit: 2048,
       rollupOptions: mode === 'prod' ? prodRollupOptions : {},
+      input: resolve(__dirname, 'src/index.html'),
     },
     css: {
       preprocessorOptions: {

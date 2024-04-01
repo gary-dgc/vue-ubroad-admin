@@ -55,3 +55,18 @@ export const isUrl = (path) => {
 export const isWindow = (val) => {
   return typeof val !== 'undefined' && is(val, 'Window');
 };
+
+/**
+ * Here Export the config object to facilitate to access the env variables
+ **/
+export const config = (() => {
+  const APP_API_BASE_URL = process.env.VITE_BASIC_URL_API;
+  const APP_API_OPEN_URL = process.env.VITE_OPEN_URL_API;
+  const APP_DES_KEY = process.env.VITE_APP_DES_KEY;
+  const _config = {
+    APP_API_BASE_URL,
+    APP_API_OPEN_URL,
+    APP_DES_KEY,
+  };
+  return Object.assign(_config, window._config || {});
+})();

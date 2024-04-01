@@ -19,18 +19,18 @@
 <script setup>
   import { computed, defineComponent, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import useStoreOut from '@/store/module/user';
-  import useMenuSiderStore from '@/store/module/app.js';
+  import { storeToRefs } from 'pinia';
+  import useAppStore from '@/store/module/app';
 
   const routes = useRoute();
-  const useStore = useStoreOut();
+  const { loading, collapsed } = storeToRefs(useAppStore());
 
   const spinning = computed(() => {
-    return useStore.getLoadingPage || false;
+    return loading || false;
   });
 
   const isCollapsed = computed(() => {
-    return useMenuSiderStore().getMenuCollapsed;
+    return collapsed || false;
   });
 </script>
 

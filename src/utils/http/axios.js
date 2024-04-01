@@ -1,3 +1,4 @@
+import Cookie from 'js-cookie';
 import axios from 'axios';
 import intercepts from './intercept.js';
 import useStore from '@/store/module/user.js';
