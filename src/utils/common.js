@@ -68,6 +68,5 @@ export const config = (() => {
     APP_API_OPEN_URL,
     APP_DES_KEY,
   };
-  console.log(_config);
   return Object.assign(_config, window._config || {});
 })();

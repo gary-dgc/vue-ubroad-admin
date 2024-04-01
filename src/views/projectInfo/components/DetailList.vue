@@ -5,10 +5,10 @@
       <div class="more">更多</div>
     </div>
     <div class="project-detail-card">
-      <Row wrap type="flex">
-        <Col :xs="24" :sm="24" :md="24" :lg="12" :xl="8" v-for="(item, index) in projectBasicList" :key="index">
-          <Card>
-            <CardGrid class="card-item" @click="tabChange(item)">
+      <a-row wrap type="flex">
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8" v-for="(item, index) in projectBasicList" :key="index">
+          <a-card>
+            <a-card-grid class="card-item" @click="tabChange(item)">
               <div class="card-item-title">
                 <SvgIcon :name="item.icon" :size="20" v-show="item.icon.indexOf('https://') == -1" />
                 <img :src="item.icon" width="20" height="20" v-show="item.icon.indexOf('https://') != -1" />
@@ -17,20 +17,20 @@
               <div class="card-item-desc">{{ item.type }}</div>
               <div class="card-item-desc" :title="item.address">地址：{{ item.address }}</div>
               <div class="card-item-desc" style="color: rgb(255, 172, 47)">日期：{{ item.date }}</div>
-            </CardGrid>
-          </Card>
-        </Col>
-      </Row>
+            </a-card-grid>
+          </a-card>
+        </a-col>
+      </a-row>
     </div>
     <div class="project-detail-notice">
       <div class="project-detail-notice-title">
         <div>动态通知</div>
         <div class="more">更多</div>
       </div>
-      <List :data-source="dataSource" item-layout="vertical" class="project-detail-notice-list">
+      <a-list :data-source="dataSource" item-layout="vertical" class="project-detail-notice-list">
         <template #renderItem="{ item }">
-          <ListItem>
-            <ListItemMeta :description="item.desc">
+          <a-list-item>
+            <a-list-item-meta :description="item.desc">
               <template #title>
                 <div class="list-item-title">
                   <div class="title" :style="{ color: `${item.color}` }">
@@ -40,38 +40,22 @@
                 </div>
               </template>
               <template #avatar>
-                <Avatar size="large" :src="item.avatar"></Avatar>
+                <a-avatar size="large" :src="item.avatar"></a-avatar>
               </template>
-            </ListItemMeta>
-          </ListItem>
+            </a-list-item-meta>
+          </a-list-item>
         </template>
-      </List>
+      </a-list>
     </div>
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
-  import { Card, Row, Col, List, Avatar } from 'ant-design-vue';
+<script setup>
   import { projectBasicList, dataSource } from '../data';
-  export default defineComponent({
-    components: {
-      Card,
-      CardGrid: Card.Grid,
-      Row,
-      Col,
-      List,
-      Avatar,
-      ListItem: List.Item,
-      ListItemMeta: List.Item.Meta,
-    },
-    setup() {
-      const tabChange = (key) => {
-        window.open(key.address, '_blank');
-      };
-      return { projectBasicList, dataSource, tabChange };
-    },
-  });
+
+  const tabChange = (key) => {
+    window.open(key.address, '_blank');
+  };
 </script>
 
 <style lang="less" scoped>

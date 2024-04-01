@@ -2,16 +2,8 @@ const indexRouters = [
   {
     path: '/',
     name: 'home',
-    redirect: '/dashboard',
+    redirect: '/home/root',
     component: () => import('@/layout/index.vue'),
-    children: [
-      {
-        name: 'dashboard',
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        meta: { icon: 'home', is_menu: true, auth_need: true, title: 'demo' },
-      },
-    ],
   },
   {
     path: '/login',

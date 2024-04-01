@@ -34,24 +34,25 @@
 </template>
 
 <script setup>
-  import { defineComponent, ref } from 'vue';
+  import { ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
-  import useSider from '@/store/module/app.js';
+  import useAppStore from '@/store/module/app.js';
   import Language from './Language.vue';
   import avatorImg from '@/assets/images/avatar.png';
   import { itemList } from '../setting';
-  import useStoreOut from '@/store/module/user.js';
+  import useUserStore from '@/store/module/user.js';
   import ForgetPassword from './ForgetPassword.vue';
 
-  const userStore = useStoreOut();
+  const userStore = useUserStore();
+  const appStore = useAppStore();
   const collapsed = ref(false);
   const forgetPwd = ref(null);
 
   // 菜单收起展开
   const handleCollapsed = () => {
     collapsed.value = !collapsed.value;
-    useSider().setMenuCollapsed(collapsed.value);
+    appStore.setCollapsed(collapsed.value);
   };
 
   const getPopupContainer = (trigger) => {

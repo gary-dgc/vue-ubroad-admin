@@ -7,31 +7,6 @@
       style="width: 100%"
       mode="inline"
     >
-      <template v-for="item in menuList" :key="item.key">
-        <template v-if="item.children && item.children.length > 0">
-          <a-sub-menu :key="item.key">
-            <template #icon>
-              <svg-icon :name="item.icon" :size="iconSize" />
-            </template>
-            <template #title>{{ item.meta.title }}</template>
-            <a-menu-item v-for="obj in item.children" :key="obj.key" :disabled="obj.disabled">
-              <router-link :to="obj.path">
-                <span>{{ obj.meta.title }}</span>
-              </router-link>
-            </a-menu-item>
-          </a-sub-menu>
-        </template>
-        <template v-else>
-          <a-menu-item :key="item.key" :disabled="item.disabled">
-            <template #icon>
-              <svg-icon :name="item.icon" :size="iconSize" />
-            </template>
-            <router-link :to="item.path">
-              <span>{{ item.meta.title }}</span>
-            </router-link>
-          </a-menu-item>
-        </template>
-      </template>
       <template v-for="item in menus" :key="item.key">
         <template v-if="item.children && item.children.length > 0">
           <a-sub-menu :key="item.key">
@@ -72,21 +47,34 @@
   import { isArray } from '@/utils/common';
 
   const routes = useRoute();
-  const useMenuSider = useAppStore();
+  const appStore = useAppStore();
   const selectedKeys = ref([]);
   const openKeys = ref([]);
 
-  const menuList = ref(useMenuSider.getRoutesList);
-  const { menus, collapsed } = storeToRefs(useMenuSider);
+  const { menus, collapsed } = storeToRefs(appStore);
 
-  // 监听路由变化
-  const querySelectedKeys = (path, arrList) => {
-    if (!isArray(arrList)) return;
-    arrList.forEach((item) => {
+  // 监听路由变化,判断哪些菜单高亮
+  const querySelectedKeys = (path, _menus) => {
+    if (!isArray(_menus)) {
+      return;
+    }
+    _menus.forEach((item) => {
+      console.log(item.path, path);
       if (item.path == path) {
         selectedKeys.value = Array(item.key);
         if (item.isHideChildMenu) openKeys.value = [];
       } else {
+        let match = false;
+        if (item.path.length >= path) {
+          match = item.path.indexOf(path) >= 0;
+        } else {
+          match = path.indexOf(item.path) >= 0;
+        }
+
+        if (match) {
+          selectedKeys.value = Array(item.key);
+        }
+
         if (item.children && item.children.length > 0) {
           const arr = item.children.find((el) => el.path == path);
           if (arr) {
@@ -101,7 +89,7 @@
   watch(
     () => routes.path,
     (newValue) => {
-      querySelectedKeys(newValue, menuList.value);
+      querySelectedKeys(newValue, menus.value);
     },
     {
       immediate: true,

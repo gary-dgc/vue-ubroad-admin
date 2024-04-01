@@ -12,9 +12,6 @@ const userSider = defineStore('useMenuSider', {
     menus: [],
   }),
   getters: {
-    getMenuCollapsed() {
-      return this.collapsed;
-    },
     getRoutesList() {
       return this.menuList;
     },
@@ -24,7 +21,7 @@ const userSider = defineStore('useMenuSider', {
     setLoading(loading) {
       this.loading = loading;
     },
-    setMenuCollapsed(flag) {
+    setCollapsed(flag) {
       this.collapsed = flag;
     },
     setRoutesList(list) {

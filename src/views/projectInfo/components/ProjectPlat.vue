@@ -2,20 +2,20 @@
   <div class="right-palt">
     <div class="right-palt-navigation">
       <div>快捷导航</div>
-      <Row wrap type="flex" class="nagiv-card">
-        <Col :span="8" v-for="item in navigationMenuList" :key="item.key">
+      <a-row wrap type="flex" class="nagiv-card">
+        <a-col :span="8" v-for="item in navigationMenuList" :key="item.key">
           <Card>
-            <CardGrid class="card-item">
+            <a-card-grid class="card-item">
               <svg-icon :name="item.icon" :color="item.color" />
               <div class="title">{{ item.value }}</div>
-            </CardGrid>
+            </a-card-grid>
           </Card>
-        </Col>
-      </Row>
+        </a-col>
+      </a-row>
     </div>
     <div class="two-title">功能预览</div>
     <div class="swiper-preview">
-      <Carousel arrows draggable autoplay>
+      <a-carousel arrows draggable autoplay>
         <template #prevArrow>
           <div class="custom-slick-arrow" style="left: 10px; z-index: 10">
             <LeftCircleOutlined />
@@ -29,36 +29,20 @@
         <div v-for="item in swiperList" :key="item.key" style="width: 100%; height: auto; border: 1px solid red">
           <img :src="item.imgUrl" alt="" />
         </div>
-      </Carousel>
+      </a-carousel>
     </div>
     <div class="two-title">日历</div>
     <div class="calendar-preview">
-      <Calendar :fullscreen="false" />
+      <a-calendar :fullscreen="false" />
     </div>
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
-  import { Row, Col, Card, Carousel, Calendar } from 'ant-design-vue';
+<script setup>
   import { navigationMenuList, swiperList } from '../data';
   import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
-  export default defineComponent({
-    components: {
-      Row,
-      Col,
-      Card,
-      CardGrid: Card.Grid,
-      Carousel,
-      Calendar,
-      LeftCircleOutlined,
-      RightCircleOutlined,
-    },
-    setup() {
-      const getImgUrl = () => {};
-      return { navigationMenuList, swiperList, getImgUrl };
-    },
-  });
+
+  const getImgUrl = () => {};
 </script>
 
 <style lang="less" scoped>
