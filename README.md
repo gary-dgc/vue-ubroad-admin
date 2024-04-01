@@ -38,9 +38,6 @@ yarn dev  或 npm run dev
 开发环境
 yarn build:dev
 
-qa环境
-yarn build:qa
-
 
 生产打包
 yarn build
