@@ -28,7 +28,7 @@
           </a-menu>
         </template>
       </a-dropdown>
-      <forget-password ref="forgetPwd" />
+      <reset-password ref="forgetPwd" />
     </div>
   </a-layout-header>
 </template>
@@ -42,7 +42,7 @@
   import avatorImg from '@/assets/images/avatar.png';
   import { itemList } from '../setting';
   import useUserStore from '@/store/module/user.js';
-  import ForgetPassword from './ForgetPassword.vue';
+  import ResetPassword from './ResetPassword.vue';
 
   const userStore = useUserStore();
   const appStore = useAppStore();
