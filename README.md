@@ -16,6 +16,11 @@ https://github.com/gary-dgc/vue-ubroad-admin.git
 
 为消除 Model.confirm 异常问题，使用锁定版本的 antD（3.2.20）和 Vue（3.3.0）后续的两个组件升级需要留意测试 Model.destroyAll 失效问题
 
+项目在/views/下的不同文件夹中通过探测routes.js文件的存在进行路由加载。
+
+
+
+## 开发准备
 - Installation dependencies
 
 版本要求：Node.js >= 18._._
