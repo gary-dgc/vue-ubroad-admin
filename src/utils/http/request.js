@@ -1,6 +1,6 @@
 import service from './axios';
 
-class requestHttp {
+class RequestWrapper {
   constructor() {}
   get(url, data, config) {
     return this.request('GET', url, { params: data }, config);
@@ -29,4 +29,4 @@ class requestHttp {
   }
 }
 
-export default new requestHttp();
+export default new RequestWrapper();

@@ -1,24 +1,24 @@
-import requestHttp from "@/utils/http/request";
+import request from '@/utils/http';
 
 const Api = {
-  Login: "/basic-api/login",
-  GetUserInfo: "/basic-api/getUsers",
-  GetMenuList: "/basic-api/getMenu",
-  LoginOut: "/basic-api/loginOut",
+  Login: '/basic-api/login',
+  GetUserInfo: '/basic-api/getUsers',
+  GetMenuList: '/basic-api/getMenu',
+  LoginOut: '/basic-api/loginOut',
 };
 
 export const login = (data) => {
-  return requestHttp.post(Api.Login, data);
+  return request.post(Api.Login, data);
 };
 
 export const getUserInfo = () => {
-  return requestHttp.get(Api.GetUserInfo);
+  return request.get(Api.GetUserInfo);
 };
 
 export const getMenuList = () => {
-  return requestHttp.get(Api.GetMenuList);
+  return request.get(Api.GetMenuList);
 };
 
 export const loginOut = () => {
-  return requestHttp.get(Api.LoginOut);
+  return request.get(Api.LoginOut);
 };
