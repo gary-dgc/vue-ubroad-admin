@@ -102,7 +102,7 @@ export default defineConfig((mode, command) => {
     build: {
       sourcemap: true,
       chunkSizeWarningLimit: 2048,
-      rollupOptions: mode === 'production' ? prodRollupOptions : {},
+      rollupOptions: mode === 'prod' ? prodRollupOptions : {},
     },
     css: {
       preprocessorOptions: {
