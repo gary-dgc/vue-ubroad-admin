@@ -25,7 +25,7 @@
     font-weight: 600;
     letter-spacing: -5px;
     color: @heading-color;
-    animation: move-letter 2s linear forwards; //forwards当动画完成后，保持最后一帧的状态
+    animation: move-letter 0.5s linear forwards; //forwards当动画完成后，保持最后一帧的状态
   }
   @keyframes move-letter {
     0% {

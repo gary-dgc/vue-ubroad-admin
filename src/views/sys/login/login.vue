@@ -29,19 +29,20 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     &-form {
       min-width: 350px;
       min-height: 300px;
       z-index: 10;
-      border: 1px solid;
-      border-image: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b) 2 2;
+      border: 1px solid @border-color-base;
+
       .form-list {
         width: 100%;
         height: 100%;
         padding: 15px;
 
         .title {
-          font-size: 26px;
+          font-size: 24px;
           font-weight: 600;
         }
 
