@@ -15,7 +15,7 @@
 
 <script>
   import { defineComponent, ref, watch, nextTick, computed } from 'vue';
-  import useMenuSiderStore from '@/store/module/sider.js';
+  import useMenuSiderStore from '@/store/module/app.js';
   import { Row, Col, Card } from 'ant-design-vue';
   import { getHistoryList } from '@/api/dashboard.js';
   import ScrollList from '@/components/ScrollList/index.vue';

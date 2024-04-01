@@ -37,7 +37,7 @@
   import { defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
-  import useSider from '@/store/module/sider.js';
+  import useSider from '@/store/module/app.js';
   import Language from './Language.vue';
   import avatorImg from '@/assets/images/avatar.png';
   import { itemList } from '../setting';

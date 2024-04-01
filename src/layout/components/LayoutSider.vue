@@ -14,7 +14,7 @@
 <script setup>
   import { computed } from 'vue';
   import LayoutMenu from './LayoutMenu.vue';
-  import useMenuSiderStore from '@/store/module/sider.js';
+  import useMenuSiderStore from '@/store/module/app.js';
 
   const sys_name = import.meta.env.VITE_SYSTEM_NAME;
   const sys_frame = import.meta.env.VITE_SYS_FRAME;

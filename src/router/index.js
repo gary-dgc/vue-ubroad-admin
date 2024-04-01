@@ -47,8 +47,10 @@ const checkMenu = (route) => {
     return null;
   }
 };
+
 /**
  * this method is called in boot/plugin.js, it detect all the routes.js in pages/* sub-folders
+ * @return menus 菜单数组
  **/
 export const loadRoutes = (router) => {
   const files = import.meta.glob('../views/**/routes.js', {
@@ -91,6 +93,8 @@ export const loadRoutes = (router) => {
   });
 
   menus.sort(menuSorter);
+
+  return menus;
 };
 
 import guards from './module/guards';
@@ -100,15 +104,6 @@ const router = createRouter({
   routes: [...indexRoute, ...errorRoutes],
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
-
-loadRoutes(router);
-
-export const detectMenus = () => {
-  const sider = useSider();
-  sider.$patch({
-    menus,
-  });
-};
 
 guards.before.forEach(router.beforeEach);
 guards.after.forEach(router.afterEach);

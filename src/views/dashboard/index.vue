@@ -13,7 +13,7 @@
   import EchartModule from './component/EchartModule.vue';
   import AnalysisData from './component/AnalysisData.vue';
   import Bus from '@/utils/bus.js';
-  import useMenuSiderStore from '@/store/module/sider.js';
+  import useMenuSiderStore from '@/store/module/app.js';
   import { BackTop } from 'ant-design-vue';
   export default defineComponent({
     components: {

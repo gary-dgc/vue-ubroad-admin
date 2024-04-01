@@ -68,7 +68,7 @@
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
   import { useRoute } from 'vue-router';
-  import useMenuSiderStore from '@/store/module/sider.js';
+  import useMenuSiderStore from '@/store/module/app.js';
   import { isArray } from '@/utils/common';
 
   const routes = useRoute();

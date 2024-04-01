@@ -20,7 +20,7 @@
   import { computed, defineComponent, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import useStoreOut from '@/store/module/user';
-  import useMenuSiderStore from '@/store/module/sider.js';
+  import useMenuSiderStore from '@/store/module/app.js';
 
   const routes = useRoute();
   const useStore = useStoreOut();
