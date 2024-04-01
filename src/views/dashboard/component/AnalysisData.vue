@@ -33,7 +33,7 @@
 
       const historyList = ref([]);
       const collapsed = computed(() => {
-        return useMenuSider.getMenuCollapsed;
+        return useMenuSider.collapsed;
       });
       watch(
         () => collapsed.value,

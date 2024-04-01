@@ -68,17 +68,17 @@
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
   import { useRoute } from 'vue-router';
-  import useMenuSiderStore from '@/store/module/app.js';
+  import useAppStore from '@/store/module/app.js';
   import { isArray } from '@/utils/common';
 
   const routes = useRoute();
-  const useMenuSider = useMenuSiderStore();
+  const useMenuSider = useAppStore();
   const selectedKeys = ref([]);
   const openKeys = ref([]);
 
   const menuList = ref(useMenuSider.getRoutesList);
-  const { menus } = storeToRefs(useMenuSider);
-  console.log('----========', menus);
+  const { menus, collapsed } = storeToRefs(useMenuSider);
+
   // 监听路由变化
   const querySelectedKeys = (path, arrList) => {
     if (!isArray(arrList)) return;
@@ -108,12 +108,8 @@
     }
   );
 
-  const collapsed = computed(() => {
-    return useMenuSiderStore().getMenuCollapsed;
-  });
-
   const iconSize = computed(() => {
-    return useMenuSiderStore().getMenuCollapsed ? 22 : 17;
+    return collapsed.value ? 22 : 17;
   });
 </script>
 

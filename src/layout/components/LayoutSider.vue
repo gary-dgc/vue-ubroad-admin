@@ -3,7 +3,7 @@
     :width="200"
     class="sider-class"
     collapsedWidth="80"
-    v-model:collapsed="isCollapsed"
+    v-model:collapsed="collapsed"
     :trigger="null"
     collapsible
   >
@@ -13,21 +13,20 @@
 
 <script setup>
   import { computed } from 'vue';
+  import { storeToRefs } from 'pinia';
   import LayoutMenu from './LayoutMenu.vue';
-  import useMenuSiderStore from '@/store/module/app.js';
+  import useAppStore from '@/store/module/app.js';
 
   const sys_name = import.meta.env.VITE_APP_NAME;
   const sys_frame = import.meta.env.VITE_APP_FRAME;
 
-  const isCollapsed = computed(() => {
-    return useMenuSiderStore().getMenuCollapsed;
-  });
+  const { collapsed } = storeToRefs(useAppStore());
 </script>
 
 <style lang="less" scoped>
   .sider-class {
     height: calc(100vh - @head-height - @foot-height);
-    overflow: hidden;
+    overflow: auto;
     text-align: center;
     color: #fff;
     background-color: #3ba0e9;

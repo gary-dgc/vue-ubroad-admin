@@ -3,66 +3,54 @@
     <CardListInfo />
     <EchartModule />
     <AnalysisData />
-    <BackTop :target="getDocEle" :visibilityHeight="100" />
+    <a-back-top :target="getDocEle" :visibilityHeight="100" />
   </div>
 </template>
 
-<script>
-  import { defineComponent, ref, onUnmounted, onMounted, watch, computed } from 'vue';
+<script setup>
+  import { ref, onUnmounted, onMounted, watch, computed } from 'vue';
+  import { storeToRefs } from 'pinia';
   import CardListInfo from './component/CardListInfo.vue';
   import EchartModule from './component/EchartModule.vue';
   import AnalysisData from './component/AnalysisData.vue';
   import Bus from '@/utils/bus.js';
-  import useMenuSiderStore from '@/store/module/app.js';
-  import { BackTop } from 'ant-design-vue';
-  export default defineComponent({
-    components: {
-      CardListInfo,
-      EchartModule,
-      AnalysisData,
-      BackTop,
-    },
-    setup() {
-      const useMenuSider = useMenuSiderStore();
-      const screenWidth = ref(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+  import useAppStore from '@/store/module/app.js';
 
-      const collapsed = computed(() => {
-        return useMenuSider.getMenuCollapsed;
-      });
+  const appStore = useAppStore();
+  const screenWidth = ref(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
 
-      watch(
-        () => collapsed.value,
-        () => {
-          Bus.emit('update-data', true);
-        }
-      );
+  const { collapsed } = storeToRefs(appStore);
 
-      watch(
-        () => screenWidth.value,
-        () => {
-          Bus.emit('update-data', false);
-        }
-      );
+  watch(
+    () => collapsed.value,
+    () => {
+      Bus.emit('update-data', true);
+    }
+  );
 
-      onMounted(() => {
-        window.onresize = () => {
-          return (() => {
-            screenWidth.value = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-          })();
-        };
-      });
-      // 移除
-      onUnmounted(() => {
-        window.onresize = null;
-      });
+  watch(
+    () => screenWidth.value,
+    () => {
+      Bus.emit('update-data', false);
+    }
+  );
 
-      // 首页锚点定位
-      const getDocEle = () => {
-        return document.getElementById('data-board');
-      };
-      return { getDocEle };
-    },
+  onMounted(() => {
+    window.onresize = () => {
+      return (() => {
+        screenWidth.value = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      })();
+    };
   });
+  // 移除
+  onUnmounted(() => {
+    window.onresize = null;
+  });
+
+  // 首页锚点定位
+  const getDocEle = () => {
+    return document.getElementById('data-board');
+  };
 </script>
 
 <style lang="less" scoped>

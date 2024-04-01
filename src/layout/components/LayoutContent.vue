@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-content" :class="{ 'collapse-content': isCollapsed }">
+  <div class="layout-content" :class="{ 'collapse-content': collapsed }">
     <a-layout-content class="content-wrapper">
       <a-spin
         size="large"
@@ -27,10 +27,6 @@
 
   const spinning = computed(() => {
     return loading || false;
-  });
-
-  const isCollapsed = computed(() => {
-    return collapsed || false;
   });
 </script>
 

@@ -28,7 +28,7 @@ const prodRollupOptions = {
 
 export default defineConfig((mode, command) => {
   const env = loadEnv(mode.mode, process.cwd(), '');
-  const { VITE_APP_NAME， VITE_PUBLIC_PATH, VITE_PORT } = env;
+  const { VITE_APP_NAME, VITE_PUBLIC_PATH, VITE_PORT } = env;
   return {
     plugins: [
       vue({
