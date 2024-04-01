@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["./src/**/*", "./mock/**/*", "vite.config.js"],
+  "exclude": ["node_modules", "dist", "**/*.ts"]
+}
