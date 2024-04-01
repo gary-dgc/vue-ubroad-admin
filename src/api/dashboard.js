@@ -1,5 +1,7 @@
-import request from '@/utils/http/request';
+import request from '@/utils/http';
+import LOGIN from './apis';
 
+console.log(LOGIN);
 const Api = {
   HistoryList: '/basic-api/history',
   BasicData: '/basic-api/dashboardBasic',

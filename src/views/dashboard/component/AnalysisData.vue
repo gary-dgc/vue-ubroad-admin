@@ -1,55 +1,41 @@
 <template>
-  <Row type="flex" wrap :gutter="[26, 16]" class="mamb-card-ant">
-    <Col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
-      <Card title="重要历史(1931.09.18-1945.08.15)">
+  <a-row type="flex" wrap :gutter="[26, 16]" class="mamb-card-ant">
+    <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
+      <a-card title="重要历史(1931.09.18-1945.08.15)">
         <ScrollList :scrollList="historyList" />
-      </Card>
-    </Col>
-    <Col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
-      <Card title="品牌">
+      </a-card>
+    </a-col>
+    <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
+      <a-card title="品牌">
         <AnalysisPie />
-      </Card>
-    </Col>
-  </Row>
+      </a-card>
+    </a-col>
+  </a-row>
 </template>
 
-<script>
-  import { defineComponent, ref, watch, nextTick, computed } from 'vue';
-  import useMenuSiderStore from '@/store/module/app.js';
-  import { Row, Col, Card } from 'ant-design-vue';
+<script setup>
+  import { ref, watch, nextTick, computed } from 'vue';
+  import useAppStore from '@/store/module/app.js';
+  import { storeToRefs } from 'pinia';
   import { getHistoryList } from '@/api/dashboard.js';
   import ScrollList from '@/components/ScrollList/index.vue';
   import AnalysisPie from './AnalysisPie.vue';
-  export default defineComponent({
-    components: {
-      Row,
-      Col,
-      Card,
-      ScrollList,
-      AnalysisPie,
-    },
-    setup() {
-      const useMenuSider = useMenuSiderStore();
 
-      const historyList = ref([]);
-      const collapsed = computed(() => {
-        return useMenuSider.collapsed;
-      });
-      watch(
-        () => collapsed.value,
-        () => {
-          nextTick(() => {});
-        }
-      );
+  const appStore = useAppStore();
 
-      getHistoryList().then((res) => {
-        if (res) {
-          historyList.value = res.historyList || [];
-        }
-      });
+  const historyList = ref([]);
+  const { collapsed } = storeToRefs(appStore);
+  watch(
+    () => collapsed.value,
+    () => {
+      nextTick(() => {});
+    }
+  );
 
-      return { historyList };
-    },
+  getHistoryList().then((res) => {
+    if (res) {
+      historyList.value = res.historyList || [];
+    }
   });
 </script>
 

@@ -1,12 +1,10 @@
 // 跨域代理前缀
-// const API_PROXY_PREFIX='/api'
-// const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.VUE_APP_API_BASE_URL : API_PROXY_PREFIX
-const { config } = require('@/utils/util')
-const BASE_URL = config.VUE_APP_API_BASE_URL
-const OPEN_URL = config.VUE_APP_API_OPEN_URL
+import { config } from '@/utils/common';
+const BASE_URL = config.APP_API_AUTH_URL;
+const OPEN_URL = config.APP_API_OPEN_URL;
 
-console.log(config)
-module.exports = {
+console.log(config);
+export default {
   LOGIN: `${BASE_URL}/sign-in`,
   USER_INFO: `${BASE_URL}/user-info`,
   USER_LIST: `${BASE_URL}/user-list`,
@@ -184,6 +182,5 @@ module.exports = {
   CAB_TRASH_RESTORE: `${BASE_URL}/cab/trash-restore`,
   CAB_TRASH_PURGE: `${BASE_URL}/cab/trash-purge`,
   CAB_USER_QUERY: `${BASE_URL}/cab/user-query`,
-  CAB_GROUP_QUERY: `${BASE_URL}/cab/usergroup-query`
-}
-
+  CAB_GROUP_QUERY: `${BASE_URL}/cab/usergroup-query`,
+};

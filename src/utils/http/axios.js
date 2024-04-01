@@ -116,7 +116,7 @@ loadIntercepts();
 
 // 初始化服务实例
 const service = axios.create({
-  baseUrl: import.meta.env.VITE_WEB_BASIC_URL_API,
+  baseUrl: import.meta.env.VITE_BASE_URL_API,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   },

@@ -60,13 +60,14 @@ export const isWindow = (val) => {
  * Here Export the config object to facilitate to access the env variables
  **/
 export const config = (() => {
-  const APP_API_BASE_URL = process.env.VITE_BASIC_URL_API;
-  const APP_API_OPEN_URL = process.env.VITE_OPEN_URL_API;
-  const APP_DES_KEY = process.env.VITE_APP_DES_KEY;
+  const APP_API_AUTH_URL = import.meta.env.VITE_AUTH_URL_API;
+  const APP_API_OPEN_URL = import.meta.env.VITE_OPEN_URL_API;
+  const APP_DES_KEY = import.meta.env.VITE_APP_DES_KEY;
   const _config = {
-    APP_API_BASE_URL,
+    APP_API_AUTH_URL,
     APP_API_OPEN_URL,
     APP_DES_KEY,
   };
+  console.log(_config);
   return Object.assign(_config, window._config || {});
 })();

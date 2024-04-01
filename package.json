@@ -8,7 +8,7 @@
   },
   "scripts": {
     "serve": "yarn dev",
-    "dev": "vite",
+    "dev": "vite --mode dev",
     "build:dev": "cross-env vite build --mode dev",
     "build": "cross-env vite build --mode prod",
     "preview": "vite preview"
